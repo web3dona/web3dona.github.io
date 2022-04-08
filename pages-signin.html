@@ -98,10 +98,6 @@
 								<span>or</span>
 							</span>
 
-							<div class="mb-1 text-center">
-								<a class="btn btn-facebook mb-3 ms-1 me-1" href="#">Connect with <i class="fab fa-facebook-f"></i></a>
-								<a class="btn btn-twitter mb-3 ms-1 me-1" href="#">Connect with <i class="fab fa-twitter"></i></a>
-							</div>
 
 							<p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a></p>
 
@@ -142,7 +138,7 @@
 					console.log(JSON.stringify(object));
 					localStorage.setItem("currentUser", JSON.stringify(object));
 					alert("sign in successful");
-					window.location.href = "userhome.html";
+					window.location.href = "index.html";
 				  } else {
 					  alert("Incorrect or invalid password");
 					}
