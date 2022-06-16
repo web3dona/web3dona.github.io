@@ -1559,7 +1559,7 @@
 			console.log("userhome page loaded. currentUser:");    
 			var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 			console.log(currentUser);
-			document.getElementById("username_display").value = currentUser.username;
+			document.getElementById("username_display").textContent = currentUser.username;
 			// document.getElementById("input_logourl").value = currentUser.logourl;
 			// document.getElementById("input_walletid").value = currentUser.ethAddress;
 		
