@@ -1218,33 +1218,10 @@
 											<div class="timeline timeline-simple mt-3 mb-3">
 												<div class="tm-body">
 													<div class="tm-title">
-														<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">November 2021</h5>
+														<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">Recent</h5>
 													</div>
-													<ol class="tm-items">
-														<li>
-															<div class="tm-box">
-																<p id="transaction_date" class="text-muted mb-0">7 months ago.</p>
-																<p>
-																	From <span id="from_address" class="text-primary"></span> to <span id="to_address" class="text-primary"></span>
-																</p>
-															</div>
-														</li>
-														<li>
-															<div class="tm-box">
-																<p class="text-muted mb-0">7 months ago.</p>
-																<p>
-																	What is your biggest developer pain point?
-																</p>
-															</div>
-														</li>
-														<li>
-															<div class="tm-box">
-																<p class="text-muted mb-0">7 months ago.</p>
-																<p>
-																	Checkout! How cool is that!
-																</p>
-															</div>
-														</li>
+													<ol class="tm-items" id="transaction_list">
+														
 													</ol>
 												</div>
 											</div>
@@ -1591,19 +1568,9 @@
 			  const results = await query.find();
 			  console.log("user transactions:", results);
 			  for (var i = 0; i < results.length; i++) {
-				document.getElementById("transaction_date").textContent = results[i].createdAt;
-				document.getElementById("from_address").textContent = results[i].attributes.from_address;
-				document.getElementById("to_address").textContent = results[i].attributes.to_address;
-				var table = document.getElementById("transaction_table");
-        		var row = table.insertRow(0);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				var cell3 = row.insertCell(2);
-				var cell4 = row.insertCell(3);
-				cell1.innerHTML = i + 1;
-				cell2.innerHTML = results[i].attributes.from_address;
-				cell3.innerHTML = results[i].attributes.to_address;
-				cell4.innerHTML = results[i].createdAt;
+				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
+						+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
+				document.getElementById("transaction_list").innerHTML += liItemHTML;				
 			  }
 			}
 		</script>
