@@ -1065,7 +1065,7 @@
 							<section class="card">
 								<div class="card-body">
 									<div class="thumb-info mb-3">
-										<img id="organization_img" src="img/!logged-user.jpg" class="rounded img-fluid" alt="John Doe">
+										<img id="org_image" src="https://despirlogistics.com/wp-content/uploads/2015/11/placeholder.gif" class="rounded img-fluid" alt="John Doe">
 										<div class="thumb-info-title">
 											<span id= "orgname_display" class="thumb-info-inner">John Doe</span>
 											<span id="username_display" class="thumb-info-type">CEO</span>
@@ -1472,9 +1472,10 @@
 			console.log("userhome page loaded. currentUser:");    
 			var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 			console.log(currentUser);
-			document.getElementById("username_display").textContent = currentUser.username;
 			document.getElementById("orgname_display").textContent = currentUser.organization_name;
-			// document.getElementById("input_walletid").value = currentUser.ethAddress;
+			if (currentUser.logourl.includes("http")) {
+				document.getElementById("org_image").src = currentUser.logourl;
+			}			
 		
 			getUserTransactions();
 		
@@ -1502,13 +1503,12 @@
 					}
 				} else {
 					  alert("Invalid Username");
-					}   
+				}   
 			}
 			function updateUser() {
 				// 1. collect all the values from the input boxes
 				console.log("update User");
 			  
-				
 				const DonaUser = Moralis.Object.extend("DonaUser");                
 				const query = new Moralis.Query(DonaUser);
 		
