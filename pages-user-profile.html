@@ -1171,65 +1171,7 @@
 								</div>
 							</section>
 
-							<section class="card">
-								<header class="card-header">
-									<div class="card-actions">
-										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
-									</div>
-
-									<h2 class="card-title">Popular Posts</h2>
-								</header>
-								<div class="card-body">
-									<ul class="simple-post-list">
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="img/post-thumb-1.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Nullam Vitae Nibh Un Odiosters</a>
-												<div class="post-meta">
-													 Jan 10, 2021
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="img/post-thumb-2.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Vitae Nibh Un Odiosters</a>
-												<div class="post-meta">
-													 Jan 10, 2021
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="img/post-thumb-3.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Odiosters Nullam Vitae</a>
-												<div class="post-meta">
-													 Jan 10, 2021
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</section>
+							
 
 						</div>
 						<div class="col-lg-8 col-xl-6">
@@ -1281,9 +1223,9 @@
 													<ol class="tm-items">
 														<li>
 															<div class="tm-box">
-																<p class="text-muted mb-0">7 months ago.</p>
+																<p id="transaction_date" class="text-muted mb-0">7 months ago.</p>
 																<p>
-																	It's awesome when we find a good solution for our projects, Porto Admin is <span class="text-primary">#awesome</span>
+																	From <span id="from_address" class="text-primary"></span> to <span id="to_address" class="text-primary"></span>
 																</p>
 															</div>
 														</li>
@@ -1301,20 +1243,14 @@
 																<p>
 																	Checkout! How cool is that!
 																</p>
-																<div class="thumbnail-gallery">
-																	<a class="img-thumbnail lightbox" href="img/projects/project-4.jpg" data-plugin-options='{ "type":"image" }'>
-																		<img class="img-fluid" width="215" src="img/projects/project-4.jpg">
-																		<span class="zoom">
-																			<i class="bx bx-search"></i>
-																		</span>
-																	</a>
-																</div>
 															</div>
 														</li>
 													</ol>
 												</div>
 											</div>
-										</div>
+										</div> 
+
+
 
 									</div>
 									<div id="edit" class="tab-pane">
@@ -1655,8 +1591,11 @@
 			  const results = await query.find();
 			  console.log("user transactions:", results);
 			  for (var i = 0; i < results.length; i++) {
+				document.getElementById("transaction_date").textContent = results[i].createdAt;
+				document.getElementById("from_address").textContent = results[i].attributes.from_address;
+				document.getElementById("to_address").textContent = results[i].attributes.to_address;
 				var table = document.getElementById("transaction_table");
-				var row = table.insertRow(0);
+        		var row = table.insertRow(0);
 				var cell1 = row.insertCell(0);
 				var cell2 = row.insertCell(1);
 				var cell3 = row.insertCell(2);
