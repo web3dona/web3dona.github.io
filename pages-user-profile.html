@@ -904,7 +904,7 @@
 									<hr class="dotted short">
 
 									<h5 class="mb-2 mt-3">About</h5>
-									<p class="text-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis vulputate quam. Interdum et malesuada</p>
+									<p class="text-2" id="description_display">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis vulputate quam. Interdum et malesuada</p>
 									<div class="clearfix">
 										<a class="text-uppercase text-muted float-end" href="#">(View All)</a>
 									</div>
@@ -994,9 +994,9 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="form-group col-md-6">
-													<label for="inputCity">City</label>
-													<input type="text" class="form-control" id="inputCity">
+												<div class="form-group col">
+													<label for="inputDescription">Description</label>
+													<input type="text" class="form-control" id="input_description" placeholder="About you">
 												</div>
 												<div class="form-group col-md-4 border-top-0 pt-0">
 													<label for="inputState">State</label>
@@ -1126,6 +1126,7 @@
 				console.log(currentUser);
 				document.getElementById("orgname_display").textContent = currentUser.organization_name;
 				document.getElementById("username_display").textContent = currentUser.username;
+				document.getElementById("description_display").textContent = currentUser.description;
 				if (currentUser.logourl.includes("http")) {
 					document.getElementById("org_image").src = currentUser.logourl;
 				}
@@ -1169,6 +1170,7 @@
 					  // The object was retrieved successfully.
 					  donaUser.set("organization_name", document.getElementById("input_orgname").value);
 					  donaUser.set("logourl", document.getElementById("input_logourl").value);
+					  donaUser.set("description", document.getElementById("input_description").value);
 		
 					  donaUser.save().then((donaUser) => {
 						  console.log("Update the object successfully.");
