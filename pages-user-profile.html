@@ -1473,6 +1473,7 @@
 			var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 			console.log(currentUser);
 			document.getElementById("orgname_display").textContent = currentUser.organization_name;
+			document.getElementById("username_display").textContent = currentUser.username;
 			if (currentUser.logourl.includes("http")) {
 				document.getElementById("org_image").src = currentUser.logourl;
 			}			
