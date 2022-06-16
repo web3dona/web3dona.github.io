@@ -1172,18 +1172,18 @@
 									</div>
 									<div id="edit" class="tab-pane">
 
-										<form class="p-3">
+										<!-- <form class="p-3"> -->
 											<h4 class="mb-3 font-weight-semibold text-dark">Personal Information</h4>
 											<div class="row row mb-4">
 												<div class="form-group col">
-													<label for="inputAddress">Address</label>
-													<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+													<label for="inputAddress">Organization Name</label>
+													<input type="text" class="form-control" id="input_orgname" placeholder="Coca-Cola">
 												</div>
 											</div>
 											<div class="row mb-4">
 												<div class="form-group col">
-													<label for="inputAddress2">Address 2</label>
-													<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+													<label for="inputAddress2">Logo URL</label>
+													<input type="text" class="form-control" id="input_logourl" placeholder="https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg">
 												</div>
 											</div>
 											<div class="row">
@@ -1220,11 +1220,11 @@
 
 											<div class="row">
 												<div class="col-md-12 text-end mt-3">
-													<button class="btn btn-primary modal-confirm">Save</button>
+													<button class="btn btn-primary modal-confirm" onclick="updateUser()">Save</button>
 												</div>
 											</div>
 
-										</form>
+										<!-- </form> -->
 
 									</div>
 								</div>
