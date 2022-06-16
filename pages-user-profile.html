@@ -1065,10 +1065,10 @@
 							<section class="card">
 								<div class="card-body">
 									<div class="thumb-info mb-3">
-										<img src="img/!logged-user.jpg" class="rounded img-fluid" alt="John Doe">
+										<img id="organization_img" src="img/!logged-user.jpg" class="rounded img-fluid" alt="John Doe">
 										<div class="thumb-info-title">
-											<span id= "username_display" class="thumb-info-inner">John Doe</span>
-											<span class="thumb-info-type">CEO</span>
+											<span id= "orgname_display" class="thumb-info-inner">John Doe</span>
+											<span id="username_display" class="thumb-info-type">CEO</span>
 										</div>
 									</div>
 
@@ -1473,7 +1473,7 @@
 			var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 			console.log(currentUser);
 			document.getElementById("username_display").textContent = currentUser.username;
-			// document.getElementById("input_logourl").value = currentUser.logourl;
+			document.getElementById("orgname_display").textContent = currentUser.organization_name;
 			// document.getElementById("input_walletid").value = currentUser.ethAddress;
 		
 			getUserTransactions();
