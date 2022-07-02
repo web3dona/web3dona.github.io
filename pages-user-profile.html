@@ -990,7 +990,7 @@
 											<div class="row mb-4">
 												<div class="form-group col">
 													<label for="inputAddress2">Logo URL</label>
-													<input type="text" class="form-control" id="input_logourl" placeholder="https://image.shutterstock.com/image-vector/no-image-vector-symbol-missing-260nw-1310632172.jpg">
+													<input type="text" class="form-control" id="input_logourl">
 												</div>
 											</div>
 											<div class="row">
@@ -1127,6 +1127,9 @@
 				document.getElementById("orgname_display").textContent = currentUser.organization_name;
 				document.getElementById("username_display").textContent = currentUser.username;
 				document.getElementById("description_display").textContent = currentUser.description;
+				document.getElementById("input_orgname").value = currentUser.organization_name;	
+				document.getElementById("input_logourl").value = currentUser.logourl;	
+				document.getElementById("input_description").value = currentUser.description;				
 				if (currentUser.logourl.includes("http")) {
 					document.getElementById("org_image").src = currentUser.logourl;
 				}
