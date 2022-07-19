@@ -896,7 +896,7 @@
 									<div class="thumb-info mb-3">
 										<img id="org_image" src="https://despirlogistics.com/wp-content/uploads/2015/11/placeholder.gif" class="rounded img-fluid" alt="John Doe">
 										<div class="thumb-info-title">
-											<span id= "orgname_display" class="thumb-info-inner">John Doe</span>
+											<span id="orgname_display" class="thumb-info-inner">John Doe</span>
 											<span id="username_display" class="thumb-info-type">CEO</span>
 										</div>
 									</div>									
@@ -968,9 +968,9 @@
 											<div class="timeline timeline-simple mt-3 mb-3">
 												<div class="tm-body">
 													<div class="tm-title">
-														<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">Recent</h5>
+														<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">Pending</h5>
 													</div>
-													<ol class="tm-items" id="transaction_list">
+													<ol class="tm-items" id="donation_list">
 														
 													</ol>
 												</div>
@@ -1032,7 +1032,7 @@
 												<div class="tm-title">
 													<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">Recent</h5>
 												</div>
-												<ol class="tm-items" id="past_transaction_list">
+												<ol class="tm-items" id="transaction_list">
 													
 												</ol>
 											</div>
@@ -1235,8 +1235,10 @@
 			  for (var i = 0; i < results.length; i++) {
 				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
 						+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
-				document.getElementById("past_transaction_list").innerHTML += liItemHTML;				
+				document.getElementById("transaction_list").innerHTML += liItemHTML;				
 			  }
+
+			  
 			}
 		</script>
 
