@@ -1123,6 +1123,7 @@
 
 			initUser();
 			getUserTransactions();
+			showDonations();
 		
 			function initUser() {
 				console.log("userhome page loaded. currentUser:");    
@@ -1240,8 +1241,31 @@
 
 			  
 			}
+
+			async function showDonations() {
+			  console.log("show all donations");
+			  let user = Moralis.User.current();
+			  if (!user) {
+				  user = await Moralis.authenticate();
+			  }
+			  // create query
+			  // var username = document.getElementById("username_display").value;
+			  console.log("username: " + currentUser.username);
+			  const query = new Moralis.Query("Donation");
+			  query.equalTo("account", currentUser.username);
+			  
+			  // run query
+			  const results = await query.find();
+			  console.log("donations:", results);
+			  for (var i = 0; i < results.length; i++) {
+				console.log(results[i].attributes.amount);
+				// var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
+				// 		+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
+				// document.getElementById("transaction_list").innerHTML += liItemHTML;				
+			  }
+			}			
 		</script>
 
-
+		
 	</body>
 </html>
