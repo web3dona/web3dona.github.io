@@ -1027,8 +1027,16 @@
 
 									</div>
 									<div id="transactions" class="tab-pane">
-
-										
+										<div class="timeline timeline-simple mt-3 mb-3">
+											<div class="tm-body">
+												<div class="tm-title">
+													<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">Recent</h5>
+												</div>
+												<ol class="tm-items" id="past_transaction_list">
+													
+												</ol>
+											</div>
+										</div>	
 									</div>
 								</div>
 							</div>
@@ -1227,7 +1235,7 @@
 			  for (var i = 0; i < results.length; i++) {
 				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
 						+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
-				document.getElementById("transaction_list").innerHTML += liItemHTML;				
+				document.getElementById("past_transaction_list").innerHTML += liItemHTML;				
 			  }
 			}
 		</script>
