@@ -1259,9 +1259,9 @@
 			  console.log("donations:", results);
 			  for (var i = 0; i < results.length; i++) {
 				console.log(results[i].attributes.amount);
-				// var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
-				// 		+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
-				// document.getElementById("transaction_list").innerHTML += liItemHTML;				
+				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
+						+ '<p>Amount <span class="text-primary">' + results[i].attributes.amount+ '</span> Status: <span class="text-primary">' + results[i].attributes.status + '</span></p></div></li>';
+				document.getElementById("donation_list").innerHTML += liItemHTML;
 			  }
 			}			
 		</script>
