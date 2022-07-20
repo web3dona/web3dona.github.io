@@ -1298,6 +1298,17 @@
 				console.log("result.");								
 			}
 
+			async function donationAmountForWallet(wallet, amount) {								
+				console.log("donation now!!! for wallet " + amount);				
+				const options = {
+						type: "native",
+						amount: Moralis.Units.ETH(amount),
+						receiver: wallet, // main admin 
+					};
+				let result = await Moralis.transfer(options);
+				console.log("result.");								
+			}
+
 			async function showDonations() {
 			  console.log("show all donations");
 			  let user = Moralis.User.current();
