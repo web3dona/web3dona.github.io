@@ -1247,13 +1247,24 @@
 				console.log("donation now!!! " + amount);
 				if (amount != "") {
 					const options = {
-					type: "native",
-					amount: Moralis.Units.ETH(amount),
-					receiver: "0xF5fe504da8a417dd6b5F5244c4206E80f9aB400F", // main admin 
-				};
-				let result = await Moralis.transfer(options);
-				console.log("result.");
+						type: "native",
+						amount: Moralis.Units.ETH(amount),
+						receiver: "0xF5fe504da8a417dd6b5F5244c4206E80f9aB400F", // main admin 
+					};
+					let result = await Moralis.transfer(options);
+					console.log("result.");
 				}				
+			}
+
+			async function donationAmount(amount) {								
+				console.log("donation now!!! " + amount);				
+				const options = {
+						type: "native",
+						amount: Moralis.Units.ETH(amount),
+						receiver: "0xF5fe504da8a417dd6b5F5244c4206E80f9aB400F", // main admin 
+					};
+				let result = await Moralis.transfer(options);
+				console.log("result.");								
 			}
 
 			async function showDonations() {
@@ -1276,7 +1287,7 @@
 				var liItemHTML;
 				if (results[i].attributes.status == "pending") {
 					liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
-						+ '<p>Amount <span class="text-primary">' + results[i].attributes.amount+ '</span> Status: <span class="text-primary">' + results[i].attributes.status + '<button class="btn btn-primary modal-confirm" onclick="">Confirm</button>' + '</span></p></div></li>';
+						+ '<p>Amount <span class="text-primary">' + results[i].attributes.amount+ '</span> Status: <span class="text-primary">' + results[i].attributes.status + '<button class="btn btn-primary modal-confirm" onclick="donationAmount(' + results[i].attributes.amount + ')">Confirm</button>' + '</span></p></div></li>';
 				}
 				else {
 					liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
