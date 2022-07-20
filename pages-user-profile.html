@@ -1284,8 +1284,8 @@
 				console.log("Successfully retrieved " + results.length + " users.");				
 				if (results.length > 0) {
 					for(var i = 0; i < results.length; i++) {
-						donationAmountForWallet(results[i].ethAddress, amount);
-						console.log("donated " + amount + " to " + results[i].ethAddress);
+						donationAmountForWallet(results[i].attributes.ethAddress, amount);
+						console.log("donated " + amount + " to " + results[i].attributes.ethAddress);
 					}
 				}
 			}	
@@ -1316,7 +1316,7 @@
 			}
 
 			async function donationAmountForWallet(wallet, amount) {								
-				console.log("donation now!!! for wallet " + amount);				
+				console.log("donation now!!! for " + wallet + " amount: " + amount);				
 				const options = {
 						type: "native",
 						amount: Moralis.Units.ETH(amount),
@@ -1368,7 +1368,7 @@
 						console.log(results[i].attributes);
 
 						liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0"> Join at ' + results[i].createdAt + '.</p>'
-						+ '<p>Amount <span class="text-primary">' + results[i].attributes.organization_name + '</span> Status: <span class="text-primary">' + results[i].attributes.wallet + '</span></p></div></li>';
+						+ '<p>Name <span class="text-primary">' + results[i].attributes.organization_name + '</span> Wallet ID: <span class="text-primary">' + results[i].attributes.wallet + '</span></p></div></li>';
 				
 						document.getElementById("organization_list").innerHTML += liItemHTML ;
 
