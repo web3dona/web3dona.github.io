@@ -934,6 +934,9 @@
 									<li class="nav-item">
 										<button class="nav-link" data-bs-target="#transactions" data-bs-toggle="tab">Past Transactions</button>
 									</li>
+									<li class="nav-item">
+										<button class="nav-link" data-bs-target="#distribution" data-bs-toggle="tab">Distribute Funds</button>
+									</li>
 								</ul>
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
@@ -1005,18 +1008,19 @@
 
 											<hr class="dotted tall">
 
-											<h4 class="mb-3 font-weight-semibold text-dark">Change Password</h4>
+											<h4 class="mb-3 font-weight-semibold text-dark">Wallet Account</h4>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<label for="inputPassword4">New Password</label>
-													<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+													<label for="inputPassword4">Wallet Address</label>
+													<input type="text" class="form-control" readonly id="wallet_input" placeholder="Connect to your wallet">
 												</div>
-												<div class="form-group col-md-6 border-top-0 pt-0">
-													<label for="inputPassword5">Re New Password</label>
-													<input type="password" class="form-control" id="inputPassword5" placeholder="Password">
-												</div>
+												<div class="form-group col-md-6">
+													<button class="btn btn-primary modal-confirm" onclick="connectWithWallet()">Connect</button>
+												</div>												
 											</div>
 
+											<hr class="dotted tall">
+											<h4 class="mb-3 font-weight-semibold text-dark">Save Account</h4>
 											<div class="row">
 												<div class="col-md-12 text-end mt-3">
 													<button class="btn btn-primary modal-confirm" onclick="updateUser()">Save</button>
@@ -1038,6 +1042,29 @@
 											</div>
 										</div>	
 									</div>
+
+									<div id="distribution" class="tab-pane">
+										<h4 class="mb-3 font-weight-semibold text-dark">Distribution Strategy</h4>
+										<div class="row">
+											<div class="form-group col-md-4">
+												<button class="btn btn-primary modal-confirm" onclick="connectWithWallet()">Equal Distribution</button>
+											</div>
+											<div class="form-group col-md-4">
+												<button class="btn btn-primary modal-confirm" onclick="connectWithWallet()">Distribution with Priority</button>
+											</div>
+										</div>
+										<div class="timeline timeline-simple mt-3 mb-3">
+											<div class="tm-body">
+												<div class="tm-title">
+													<h5 class="m-0 pt-2 pb-2 text-dark font-weight-semibold text-uppercase">All Organizations</h5>
+												</div>
+												<ol class="tm-items" id="organization_list">
+													
+												</ol>
+											</div>
+										</div>	
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -1125,6 +1152,7 @@
 			initUser();
 			getUserTransactions();
 			showDonations();
+			listAllOrgs();
 		
 			function initUser() {
 				console.log("userhome page loaded. currentUser:");    
@@ -1138,6 +1166,7 @@
 				document.getElementById("input_orgname").value = currentUser.organization_name;	
 				document.getElementById("input_logourl").value = currentUser.logourl;	
 				document.getElementById("input_description").value = currentUser.description;				
+				document.getElementById("wallet_input").value = currentUser.wallet;				
 				if (currentUser.logourl.includes("http")) {
 					document.getElementById("org_image").src = currentUser.logourl;
 				}
@@ -1182,6 +1211,7 @@
 					  donaUser.set("organization_name", document.getElementById("input_orgname").value);
 					  donaUser.set("logourl", document.getElementById("input_logourl").value);
 					  donaUser.set("description", document.getElementById("input_description").value);
+					  donaUser.set("wallet", document.getElementById("wallet_input").value);
 		
 					  donaUser.save().then((donaUser) => {
 						  console.log("Update the object successfully.");
@@ -1203,7 +1233,7 @@
 				}
 				console.log("logged in user:", user);
 				console.log("logged in user:", user.attributes.ethAddress);
-				document.getElementById("input_walletid").value = user.attributes.ethAddress;
+				document.getElementById("wallet_input").value = user.attributes.ethAddress;
 		
 				const DonaUser = Moralis.Object.extend("DonaUser");                
 				const query = new Moralis.Query(DonaUser);
@@ -1296,7 +1326,44 @@
 				}
 				document.getElementById("donation_list").innerHTML += liItemHTML ;
 			  }
-			}			
+			}
+			
+			async function listAllOrgs() {
+				console.log("Iterate all users");
+		
+				const DonaUser = Moralis.Object.extend("DonaUser");
+				const query = new Moralis.Query(DonaUser);
+				const results = await query.find();
+				console.log("Successfully retrieved " + results.length + " users.");				
+				if (results.length > 0) {
+					for(var i = 0; i < results.length; i++) {
+						console.log(results[i].attributes);
+
+						liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0"> Join at ' + results[i].createdAt + '.</p>'
+						+ '<p>Amount <span class="text-primary">' + results[i].attributes.organization_name + '</span> Status: <span class="text-primary">' + results[i].attributes.wallet + '</span></p></div></li>';
+				
+						document.getElementById("organization_list").innerHTML += liItemHTML ;
+
+						// var item = 
+						// 	'<div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-1-5 isotope-item">' +
+						// 			'<div class="portfolio-item hover-effect-1 text-center pb-2 mb-3">' +										
+						// 					'<div class="thumb-info thumb-info-no-zoom thumb-info-no-overlay thumb-info-no-bg box-shadow-7">' +
+						// 						'<div class="thumb-info-wrapper thumb-info-wrapper-demos m-0">' +
+						// 							'<img class="img-fluid h-auto" width="350" height="259" src="' + results[i].attributes.logourl + '"/>' + 
+						// 						'</div>' + 
+						// 					'</div>' + 
+						// 				'<h5 class="font-weight-semibold text-color-dark text-capitalize text-3 mt-3">' + results[i].attributes.organization_name + '</h5>' +
+						// 			'</div>' +
+						// 	'</div>';
+
+						// 	$("#orgContainer").append(item);
+						// 	console.log("added item");
+
+					}
+				} else {
+				  alert("Invalid Username");
+				}   
+			}
 		</script>
 
 		
