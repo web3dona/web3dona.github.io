@@ -1045,9 +1045,12 @@
 
 									<div id="distribution" class="tab-pane">
 										<h4 class="mb-3 font-weight-semibold text-dark">Distribution Strategy</h4>
+										<form method="get" action="/">
+											<textarea id="equal_distribution_amount" name="message-text" data-plugin-textarea-autosize placeholder="Donation amount" rows="1"></textarea>
+										</form>
 										<div class="row">
 											<div class="form-group col-md-4">
-												<button class="btn btn-primary modal-confirm" onclick="connectWithWallet()">Equal Distribution</button>
+												<button class="btn btn-primary modal-confirm" onclick="equalDonation()">Equal Distribution</button>
 											</div>
 											<div class="form-group col-md-4">
 												<button class="btn btn-primary modal-confirm" onclick="connectWithWallet()">Distribution with Priority</button>
@@ -1272,6 +1275,20 @@
 				document.getElementById("transaction_list").innerHTML += liItemHTML;				
 			  }			  
 			}
+
+			async function equalDonation() {
+				var amount = document.getElementById("equal_distribution_amount").value;
+				const DonaUser = Moralis.Object.extend("DonaUser");
+				const query = new Moralis.Query(DonaUser);
+				const results = await query.find();
+				console.log("Successfully retrieved " + results.length + " users.");				
+				if (results.length > 0) {
+					for(var i = 0; i < results.length; i++) {
+						donationAmountForWallet(results[i].ethAddress, amount);
+						console.log("donated " + amount + " to " + results[i].ethAddress);
+					}
+				}
+			}	
 
 			async function donationNow() {				
 				var amount = document.getElementById("donation_amount_input").value;
