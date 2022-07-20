@@ -64,8 +64,8 @@
 								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrI60bHCviPrwDF-W1gmlfuoz7jQrSKGKaw&usqp=CAU" alt="Joseph Doe" class="rounded-circle" data-lock-picture="img/!logged-user.jpg" />
 							</figure>
 							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-								<span class="name">Username</span>
-								<span class="role">Organization Name</span>
+								<span class="name" id="username_display">Username</span>
+								<span class="role" id="orgname_display">Organization Name</span>
 							</div>
 
 							<i class="fa custom-caret"></i>
@@ -896,9 +896,9 @@
 									<div class="thumb-info mb-3">
 										<img id="org_image" src="https://despirlogistics.com/wp-content/uploads/2015/11/placeholder.gif" class="rounded img-fluid" alt="John Doe">
 										<div class="thumb-info-title">
-											<span id="orgname_display" class="thumb-info-inner">John Doe</span>
-											<span id="username_display" class="thumb-info-type">CEO</span>
-										</div>
+											<span id="orgname_display1" class="thumb-info-inner">John Doe</span>
+											<span id="username_display1" class="thumb-info-type">CEO</span>
+										</div> 
 									</div>									
 
 									<hr class="dotted short">
@@ -1131,6 +1131,8 @@
 				console.log(currentUser);
 				document.getElementById("orgname_display").textContent = currentUser.organization_name;
 				document.getElementById("username_display").textContent = currentUser.username;
+				document.getElementById("orgname_display1").textContent = currentUser.organization_name;
+				document.getElementById("username_display1").textContent = currentUser.username;
 				document.getElementById("description_display").textContent = currentUser.description;
 				document.getElementById("input_orgname").value = currentUser.organization_name;	
 				document.getElementById("input_logourl").value = currentUser.logourl;	
@@ -1236,7 +1238,8 @@
 			  for (var i = 0; i < results.length; i++) {
 				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
 						+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
-				document.getElementById("transaction_list").innerHTML += liItemHTML;				
+				document.getElementById("transaction_list").innerHTML += liItemHTML;	
+
 			  }
 
 			  
@@ -1259,9 +1262,16 @@
 			  console.log("donations:", results);
 			  for (var i = 0; i < results.length; i++) {
 				console.log(results[i].attributes.amount);
-				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
+				var liItemHTML;
+				if (results[i].attributes.status == "pending") {
+					liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
+						+ '<p>Amount <span class="text-primary">' + results[i].attributes.amount+ '</span> Status: <span class="text-primary">' + results[i].attributes.status + '<button class="btn btn-primary modal-confirm" onclick="">Confirm</button>' + '</span></p></div></li>';
+				}
+				else {
+					liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
 						+ '<p>Amount <span class="text-primary">' + results[i].attributes.amount+ '</span> Status: <span class="text-primary">' + results[i].attributes.status + '</span></p></div></li>';
-				document.getElementById("donation_list").innerHTML += liItemHTML;
+				}
+				document.getElementById("donation_list").innerHTML += liItemHTML ;
 			  }
 			}			
 		</script>
