@@ -940,24 +940,24 @@
 
 										<div class="p-3">
 
-											<h4 class="mb-3 font-weight-semibold text-dark">Update Status</h4>
+											<h4 class="mb-3 font-weight-semibold text-dark">Make a Donation</h4>
 
 											<section class="simple-compose-box mb-3">
 												<form method="get" action="/">
-													<textarea name="message-text" data-plugin-textarea-autosize placeholder="What's on your mind?" rows="1"></textarea>
+													<textarea id="donation_amount_input" name="message-text" data-plugin-textarea-autosize placeholder="Donation amount" rows="1"></textarea>
 												</form>
 												<div class="compose-box-footer">
 													<ul class="compose-toolbar">
-														<li>
+														<!-- <li>
 															<a href="#"><i class="fas fa-camera"></i></a>
 														</li>
 														<li>
 															<a href="#"><i class="fas fa-map-marker-alt"></i></a>
-														</li>
+														</li> -->
 													</ul>
 													<ul class="compose-btn">
 														<li>
-															<a href="#" class="btn btn-primary btn-xs">Post</a>
+															<a href="#" onclick="donationNow()" class="btn btn-primary btn-xs">Donate Now</a>
 														</li>
 													</ul>
 												</div>
@@ -1117,7 +1117,7 @@
 			const serverUrl = "https://zomrsnqirxn1.usemoralis.com:2053/server";
 			const appId = "vfbcTpbSt3gm0cSmOl9jO0kcVQ79GLxrSkThQrVg";
 			Moralis.start({ serverUrl, appId });
-			//Moralis.enableWeb3();
+			Moralis.enableWeb3();
 
 			var currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -1238,11 +1238,28 @@
 			  for (var i = 0; i < results.length; i++) {
 				var liItemHTML = '<li><div class="tm-box"><p class="text-muted mb-0">' + results[i].createdAt + '.</p>'
 						+ '<p>From <span class="text-primary">' + results[i].attributes.from_address+ '</span> to <span class="text-primary">' + results[i].attributes.to_address + '</span></p></div></li>';
+<<<<<<< HEAD
 				document.getElementById("transaction_list").innerHTML += liItemHTML;	
 
 			  }
+=======
+				document.getElementById("transaction_list").innerHTML += liItemHTML;				
+			  }			  
+			}
+>>>>>>> 7afaa2d (update)
 
-			  
+			async function donationNow() {				
+				var amount = document.getElementById("donation_amount_input").value;
+				console.log("donation now!!! " + amount);
+				if (amount != "") {
+					const options = {
+					type: "native",
+					amount: Moralis.Units.ETH(amount),
+					receiver: "0xF5fe504da8a417dd6b5F5244c4206E80f9aB400F", // main admin 
+				};
+				let result = await Moralis.transfer(options);
+				console.log("result.");
+				}				
 			}
 
 			async function showDonations() {
