@@ -932,7 +932,7 @@
 										<button class="nav-link" data-bs-target="#edit" data-bs-toggle="tab">Edit Account</button>
 									</li>
 									<li class="nav-item">
-										<button class="nav-link" data-bs-target="#transactions" data-bs-toggle="tab">Past Transactions</button>
+										<button class="nav-link" onclick="getUserTransactions()" data-bs-target="#transactions" data-bs-toggle="tab">Past Transactions</button>
 									</li>
 									<li class="nav-item">
 										<button class="nav-link" data-bs-target="#distribution" data-bs-toggle="tab">Distribute Funds</button>
@@ -1143,10 +1143,10 @@
 		<script src="https://unpkg.com/moralis/dist/moralis.js"></script>
 
 		<script>
-			const serverUrl = "https://hokdtv3wznkh.usemoralis.com:2053/server";
-			const appId = "b3vlwCAXobIXOsfNijo0Q18AArxBgfxS73XahdPx";
-			// const serverUrl = "https://zomrsnqirxn1.usemoralis.com:2053/server";
-			// const appId = "vfbcTpbSt3gm0cSmOl9jO0kcVQ79GLxrSkThQrVg";
+			//const serverUrl = "https://hokdtv3wznkh.usemoralis.com:2053/server";
+			//const appId = "b3vlwCAXobIXOsfNijo0Q18AArxBgfxS73XahdPx";
+			const serverUrl = "https://zomrsnqirxn1.usemoralis.com:2053/server";
+			const appId = "vfbcTpbSt3gm0cSmOl9jO0kcVQ79GLxrSkThQrVg";
 			Moralis.start({ serverUrl, appId });
 			Moralis.enableWeb3();
 
